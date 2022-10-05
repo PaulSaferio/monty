@@ -1,27 +1,13 @@
 #include "monty.h"
-
-
-
 /**
-
- * nop -  does nothing
-
- * @stack: doesnt matter
-
- * @line_cnt : for nothing
-
+ * nop - does not do anything
+ * @stack: head of linkedlist
+ * @line_number: line number of the instruction
  *
-
- * Return: NOTHING
-
+ * Return: No return
  */
-
-void nop(stack_t **stack, unsigned int line_cnt)
-  
+void nop(stack_t **stack, unsigned int line_number)
 {
-  
-  (void) stack;
-  
-  (void) line_cnt;
-  
+	(void)stack;
+	(void)line_number;
 }
