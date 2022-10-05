@@ -1,75 +1,34 @@
-#include <stdio.h>
-
-#include <ctype.h>
-
-#include <stdlib.h>
-
-#include <string.h>
-
 #include "monty.h"
 
-
-
 /**
-
- * push - push element into the stack
-
- * @stack: stack given by main
-
- * @line_cnt: amount of lines
-
+ * push - Add node to the stack
+ * @stack: head of linkedlist
+ * @line_number: line number of the instruction
  *
-
- * Return: void
-
+ * Return: No return
  */
-
-void push(stack_t **stack, unsigned int line_cnt)
-  
+void push(stack_t **stack, unsigned int line_number)
 {
-  
-  char *n = global.argument;
-  
 
-  
-  if ((is_digit(n)) == 0)
-    
-    {
-      
-      fprintf(stderr, "L%d: usage: push integer\n", line_cnt);
-      
-      exit(EXIT_FAILURE);
-      
-    }
-  
+	int n = 0;
 
-  
-  if (global.data_struct == 1)
-    
-    {
-      
-      if (!add_node(stack, atoi(global.argument)))
-	
+	if (globalvar.token2 == NULL)
 	{
-	  
-	  exit(EXIT_FAILURE);
-	  
+		free_dlistint(*stack);
+		stderr_int(line_number);
 	}
-      
-    }
-  
-  else
-    
-    {
-      
-      if (!queue_node(stack, atoi(global.argument)))
-	
+	if (!_isdigit() || stack == NULL)
 	{
-	  
-	  exit(EXIT_FAILURE);
-	  
+		free_dlistint(*stack);
+		stderr_int(line_number);
 	}
-      
-    }
-  
+	n = atoi(globalvar.token2);
+	if (*stack  == NULL)
+	{
+		create_node_stackfirst(stack, n);
+	}
+	else
+	{
+		create_node_stackend(stack, n);
+	}
 }
