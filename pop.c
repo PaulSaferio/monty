@@ -1,59 +1,51 @@
-#include <stdio.h>
-
-#include <ctype.h>
-
-#include <stdlib.h>
-
-#include <string.h>
-
 #include "monty.h"
-
-
-
 /**
-
- * pop - pops the very top element of the stack
-
- * @stack: stack given by main in start.c
-
- * @line_cnt: line number for error messages
-
+ * pop - Add node to the stack
+ * @stack: head of linkedlist
+ * @line_number: line number of the instruction
  *
-
- * Return: void
-
+ * Return: No return
  */
-
-void pop(stack_t **stack, unsigned int line_cnt)
-  
+void pop(stack_t **stack, unsigned int line_number)
 {
-  
-  stack_t *tmp = NULL;
-  
 
-  
-  if (!stack || !*stack)
-    
-    {
-      
-      fprintf(stderr, "L%u: can't pop an empty stack\n", line_cnt);
-      
-      exit(EXIT_FAILURE);
-      
-    }
-  
+	stack_t *temp = NULL;
+	stack_t *temp2 = NULL;
+	int i = 0, j = 0, flag = 0;
 
-  
-  tmp = (*stack)->next;
-  
-  free(*stack);
-  
-  *stack = tmp;
-  
-  if (!*stack)
-    
-    return; /* prevents errors cause next line might assign a NULL */
-  
-  (*stack)->prev = NULL;
-  
+	if (stack == NULL)
+	{
+		free_dlistint(*stack);
+		pop_e(line_number); }
+	if (*stack == NULL)
+	{
+		free_dlistint(*stack);
+		pop_e(line_number); }
+	temp = *stack;
+	while (temp->next != NULL)
+	{
+		temp = temp->next;
+		i++;
+		flag = 1;
+	}
+	temp2 = *stack;
+	while (j < (i - 1))
+	{
+		temp2 = temp2->next;
+		j++;
+	}
+	if (i == 0 && flag == 0)
+	{
+
+		free(*stack);
+		*stack = NULL;
+		return;
+	}
+	else
+	{
+		temp2->next = NULL;
+		free(temp);
+		temp = NULL;
+		return;
+	}
 }
